@@ -42,84 +42,16 @@ public class Main {
 
         if (mainMenu.equalsIgnoreCase("play")) {
             System.out.println("");
-            System.out.println("Type in \'rock\' \'paper\' or \'scissors\' to play.");
+            System.out.println("Which game mode would you like to play?" + "\n" +
+                               "Single player or multi-player?");
             System.out.println("");
 
-            String gamePlay = scanner.nextLine();
-            int gamePlayInt = 0;
-            if (gamePlay.equalsIgnoreCase("rock")) {
-                gamePlayInt = 1;
-            } else if (gamePlay.equalsIgnoreCase("paper")) {
-                gamePlayInt = 2;
-            } else if (gamePlay.equalsIgnoreCase("scissors")) {
-                gamePlayInt = 3;
-            } else {
-                System.out.println("That's not a move... Get it right or I'll shut down.");
-                gamePlay = scanner.nextLine();
-                if (gamePlay.equalsIgnoreCase("rock")) {
-                    gamePlayInt = 1;
-                } else if (gamePlay.equalsIgnoreCase("paper")) {
-                    gamePlayInt = 2;
-                } else if (gamePlay.equalsIgnoreCase("scissors")) {
-                    gamePlayInt = 3;
-                } else {
-                    System.out.println("Ugh... Stupid human!");
-                    System.exit(0);
-                }
-            }
+            String gameType = scanner.nextLine();
 
-
-            String computerMove = null;
-            Random randomMove = new Random();
-            int newRandomMove = randomMove.nextInt(3) + 1;
-
-            if (newRandomMove == 1) {
-                computerMove = "rock";
-            } else if (newRandomMove == 2) {
-                computerMove = "paper";
-            } else if (newRandomMove == 3) {
-                computerMove = "scissors";
-            }
-
-            String gameResult = null;
-            if ((newRandomMove == 1 && gamePlayInt == 1) ||
-                    (newRandomMove == 2 && gamePlayInt == 2) ||
-                    (newRandomMove == 3 && gamePlayInt == 3)) {
-                gameResult = "It's a tie!";
-            } else if (newRandomMove == 1 && gamePlayInt == 2) {
-                gameResult = "Paper covers rock! You win!";
-            } else if (newRandomMove == 1 && gamePlayInt == 3) {
-                gameResult = "Rock breaks scissors! You lose!";
-            } else if (newRandomMove == 2 && gamePlayInt == 1) {
-                gameResult = "Paper covers rock! You lose!";
-            } else if (newRandomMove == 2 && gamePlayInt == 3) {
-                gameResult = "Scissors cuts paper! You win!";
-            } else if (newRandomMove == 3 && gamePlayInt == 1) {
-                gameResult = "Rock breaks scissors! You win!";
-            } else if (newRandomMove == 3 && gamePlayInt == 2) {
-                gameResult = "Scissors cuts paper! You lose!";
-            }
-
-            if (gamePlay.equalsIgnoreCase("rock") ||
-                    gamePlay.equalsIgnoreCase("paper") ||
-                    gamePlay.equalsIgnoreCase("scissors")) {
-                System.out.println("");
-                System.out.println("Computer picked: " + computerMove);
-                System.out.println("You picked: " + gamePlay);
-                System.out.println(gameResult);
-                System.out.println("Thanks for playing!");
-                System.out.println("");
-
-                try(FileWriter fw = new FileWriter(historyFile, true);
-                    BufferedWriter bw = new BufferedWriter(fw);
-                    PrintWriter out = new PrintWriter(bw))
-                {
-                    out.println("Computer picked: " + computerMove + "\n" +
-                            "You picked: " + gamePlay + "\n" +
-                            gameResult + "\n");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            if (gameType.equalsIgnoreCase("Single player")) {
+                singlePlayer();
+            } else if(gameType.equalsIgnoreCase("multi-player")) {
+                multiPlayer();
             }
         } else if (mainMenu.equalsIgnoreCase("quit")) {
             System.out.println("Bai!");
@@ -143,6 +75,98 @@ public class Main {
             System.out.println("");
         }
         newGame();
+    }
+
+    private static void multiPlayer() {
+        System.out.println("");
+        System.out.println("Coming soon!");
+        System.out.println("");
+        newGame();
+    }
+
+    private static void singlePlayer() {
+        System.out.println("");
+        System.out.println("Type in \'rock\' \'paper\' or \'scissors\' to play.");
+        System.out.println("");
+
+        Scanner scanner = new Scanner(System.in);
+        String gamePlay = scanner.nextLine();
+        int gamePlayInt = 0;
+        while(gamePlayInt == 0)
+            if (gamePlay.equalsIgnoreCase("rock")) {
+                gamePlayInt = 1;
+            } else if (gamePlay.equalsIgnoreCase("paper")) {
+                gamePlayInt = 2;
+            } else if (gamePlay.equalsIgnoreCase("scissors")) {
+                gamePlayInt = 3;
+            } else {
+                System.out.println("That's not a move... Get it right or I won't play with you.");
+                gamePlay = scanner.nextLine();
+                if (gamePlay.equalsIgnoreCase("rock")) {
+                    gamePlayInt = 1;
+                } else if (gamePlay.equalsIgnoreCase("paper")) {
+                    gamePlayInt = 2;
+                } else if (gamePlay.equalsIgnoreCase("scissors")) {
+                    gamePlayInt = 3;
+                } else {
+                    System.out.println("Ugh... Stupid human!");
+                    System.exit(0);
+                }
+            }
+
+
+        String computerMove = null;
+        Random randomMove = new Random();
+        int newRandomMove = randomMove.nextInt(3) + 1;
+
+        if (newRandomMove == 1) {
+            computerMove = "rock";
+        } else if (newRandomMove == 2) {
+            computerMove = "paper";
+        } else if (newRandomMove == 3) {
+            computerMove = "scissors";
+        }
+
+        String gameResult = null;
+        if ((newRandomMove == 1 && gamePlayInt == 1) ||
+                (newRandomMove == 2 && gamePlayInt == 2) ||
+                (newRandomMove == 3 && gamePlayInt == 3)) {
+            gameResult = "It's a tie!";
+        } else if (newRandomMove == 1 && gamePlayInt == 2) {
+            gameResult = "Paper covers rock! You win!";
+        } else if (newRandomMove == 1 && gamePlayInt == 3) {
+            gameResult = "Rock breaks scissors! You lose!";
+        } else if (newRandomMove == 2 && gamePlayInt == 1) {
+            gameResult = "Paper covers rock! You lose!";
+        } else if (newRandomMove == 2 && gamePlayInt == 3) {
+            gameResult = "Scissors cuts paper! You win!";
+        } else if (newRandomMove == 3 && gamePlayInt == 1) {
+            gameResult = "Rock breaks scissors! You win!";
+        } else if (newRandomMove == 3 && gamePlayInt == 2) {
+            gameResult = "Scissors cuts paper! You lose!";
+        }
+
+        if (gamePlay.equalsIgnoreCase("rock") ||
+                gamePlay.equalsIgnoreCase("paper") ||
+                gamePlay.equalsIgnoreCase("scissors")) {
+            System.out.println("");
+            System.out.println("Computer picked: " + computerMove);
+            System.out.println("You picked: " + gamePlay);
+            System.out.println(gameResult);
+            System.out.println("Thanks for playing!");
+            System.out.println("");
+
+            try(FileWriter fw = new FileWriter(historyFile, true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println("Computer picked: " + computerMove + "\n" +
+                        "You picked: " + gamePlay + "\n" +
+                        gameResult + "\n");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
 
