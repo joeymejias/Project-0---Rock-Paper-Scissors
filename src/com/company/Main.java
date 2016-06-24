@@ -122,6 +122,7 @@ public class Main {
                 }
             }
         } else if (mainMenu.equalsIgnoreCase("quit")) {
+            System.out.println("Bai!");
             System.exit(0);
         } else if (mainMenu.equalsIgnoreCase("history")) {
             try{
