@@ -1,8 +1,6 @@
 package com.company;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -23,7 +21,6 @@ import java.util.Scanner;
  */
 
 public class Main {
-    //static final List<String> gameHistory = new ArrayList<>();
     static String historyFile = "history.txt";
 
     public static void main(String[] args) {
