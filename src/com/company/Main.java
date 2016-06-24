@@ -48,12 +48,19 @@ public class Main {
 
             String gamePlay = scanner.nextLine();
             int gamePlayInt = 0;
-            if (gamePlay.equalsIgnoreCase("rock")){
-                gamePlayInt = 1;
-            } else if(gamePlay.equalsIgnoreCase("paper")) {
-                gamePlayInt = 2;
-            } else if(gamePlay.equalsIgnoreCase("scissors")){
-                gamePlayInt = 3;
+            while(!gamePlay.equalsIgnoreCase("rock") ||
+                    !gamePlay.equalsIgnoreCase("paper")||
+                    !gamePlay.equalsIgnoreCase("scissors")){
+                if (gamePlay.equalsIgnoreCase("rock")){
+                    gamePlayInt = 1;
+                } else if(gamePlay.equalsIgnoreCase("paper")) {
+                    gamePlayInt = 2;
+                } else if(gamePlay.equalsIgnoreCase("scissors")){
+                    gamePlayInt = 3;
+                } else {
+                    System.out.println("That's not a move...Try again.");
+                    gamePlay = scanner.nextLine();
+                }
             }
 
             String computerMove = null;
